@@ -1,0 +1,8 @@
+
+.counter {
+  color: black;
+}
+
+.counter.exceeded {
+color: red
+}
