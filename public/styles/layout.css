@@ -3,6 +3,9 @@
  * https://css-tricks.com/international-box-sizing-awareness-day/
  * Do not modify these two selectors, please
  */
+
+ 
+
 html {
   box-sizing: border-box;
 }
@@ -18,6 +21,31 @@ body {
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+nav {
+  font-family: 'Bungee', cursive, sans-serif; // possibly take ou tthe cursive part
+
+}
+
+header {
+  height: 400px;
+  width: 100%;
+  /* align-self: center; */
+}
+
+main {
+  
+  height:400px;
+  width:100%;
+  padding: 0 5% 0 5%;
+  background-color:#f4f1ec;
+  background-image:url(../images/asfalt-light.png);
+}
+
+main h1 {
+  margin: 0px;
 }
 
 /*
