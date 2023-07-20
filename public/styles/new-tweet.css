@@ -21,7 +21,7 @@ textarea {
   width: 100%;
   resize: none;
   outline: none;
-  /* border-color: none; */
+  overflow: hidden;
 }
 
 #tweet-text {
@@ -35,6 +35,7 @@ hr {
 .tweet-text-footer {
   display:flex;
   justify-content: space-between;
+  margin-bottom: 50px;
 }
 
 .btn-tweet {
