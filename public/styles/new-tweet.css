@@ -1,8 +1,45 @@
 
 .counter {
-  color: black;
+  color: #545149;
+  font-family: 'Bungee', sans-serif;
 }
 
 .counter.exceeded {
 color: red
+}
+
+textarea::placeholder {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  display:flex;
+  padding-top: 30px 
+}
+
+textarea {
+  background: transparent;
+  border-style: none;
+  width: 100%;
+  resize: none;
+  outline: none;
+  /* border-color: none; */
+}
+
+#tweet-text {
+  color: #545149;  
+}
+
+hr {
+  border: 2px solid #545149
+}
+
+.tweet-text-footer {
+  display:flex;
+  justify-content: space-between;
+}
+
+.btn-tweet {
+  color: white;
+  background-color: #4152a1;
+  border-color: #39488a;
+  font-family: 'Bungee', sans-serif;
 }

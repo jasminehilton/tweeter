@@ -65,15 +65,56 @@
   <div>
     <main>
       <section class="new-tweet">
-        <h2>Compose Tweet</h2>
+        <!-- <h2>Compose Tweet</h2> -->
         <form id="tweetForm" method="POST" action="/tweets/">
-          <label for="tweet-text">What are you humming about?</label>
-          <textarea name="text" id="tweet-text" ></textarea>
+          <!-- <label for="tweet-text" class="tweet-placeholder">What are you humming about?</label> -->
+          <!-- <label for="tweet-text" class="tweet-placeholder" placeholder="What are you humming about?">dede</label> -->
+          <textarea placeholder="What are you humming about?" name="text" id="tweet-text"></textarea>
           <div>
-            <button type="submit">Tweet</button>
-            <output name="counter" class="counter" id="counter" for="tweet-text" >140</output>
+            <hr class="tweet-text-line">
+            <div class="tweet-text-footer" >
+              <button type="submit" class="btn-tweet">Tweet</button>
+              <output name="counter" class="counter" id="counter" for="tweet-text" >140</output>
+            </div>
           </div>
         </form>
+
+        <p class="cloud"></p>
+
+        <section>
+          <div class="tweet">
+            <header class="tweet-header" >
+              <div class="tweet-header-div">
+                <div class="tweet-header-left">
+                  <i class="fa-solid fa-user-ninja fa-2xl"></i>
+                  name
+                </div>
+                <div class="tweet-header-right">
+                  @handle
+                </div>
+              </div>
+            </header>
+            <div class="tweet-material" >
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic eaque sed, qui numquam eveniet nostrum maxime dicta quos distinctio assumenda labore nemo ratione. Natus minima officia quo animi assumenda quos?
+            </div>
+            <footer>
+              <hr>
+              <div class="tweet-footer-div" >
+                <div id="X DAYS AGO" >
+                  X days ago
+                </div>
+                <div id="EMOJIS">
+                  <i class="fa-solid fa-flag" id="emoji1" ></i>
+                  <i class="fa-solid fa-retweet" id="emoji2"></i>
+                  <i class="fa-solid fa-heart" id="emoji3"></i>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </section>
+
+        <p class="cloud"></p>
+
       </section>
     </main>
   </div>
@@ -81,3 +122,36 @@
 </html>
 
 
+
+<!-- this works but hte sections are messed -->
+
+<!-- 
+<section>
+  <div >
+    <header class="tweet-header" >
+      <div class="tweet-header-div">
+        <div class="tweet-header-left">
+          <i class="fa-solid fa-user-ninja fa-2xl"></i>
+          name
+        </div>
+        <div class="tweet-header-right">
+          @handle
+        </div>
+      </div>
+    </header>
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic eaque sed, qui numquam eveniet nostrum maxime dicta quos distinctio assumenda labore nemo ratione. Natus minima officia quo animi assumenda quos?
+    </div>
+    <footer>
+      <hr>
+      <div id="X DAYS AGO" >
+        X days ago
+      </div>
+      <div id="EMOJIS">
+        <i class="fa-solid fa-flag"></i>
+        <i class="fa-solid fa-retweet"></i>
+        <i class="fa-solid fa-heart"></i>
+      </div>
+    </footer>
+  </div>
+</section> -->
