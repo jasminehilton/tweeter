@@ -81,4 +81,25 @@ $(function() {
   // loading the tweets
   renderTweets(data);
  
+  $("#tweetForm").submit(function(event) {
+    event.preventDefault();
+    // const tweetHold = $("#tweet-text")[0].value;
+    // console.log(tweetHold);
+
+    const formData = $('#tweetForm').serialize();
+    console.log("formData" , formData);
+    $.ajax({
+      type: "POST",
+      url: "/tweets/",
+      data: formData,
+      encode: true,
+    }).then(function(data) {
+      console.log("data", data);
+    }).catch(function(err) {
+      console.log("err ",err);
+    });
+  });
 });
+
+
+
