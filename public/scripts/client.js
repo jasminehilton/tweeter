@@ -38,7 +38,7 @@ const createTweetElement = function(tweetData) {
 };
 
 const renderTweets = function(tweets) {
-
+  $('#tweets-container').empty();
   for (let tweet of tweets) {
     const $tweet = createTweetElement(tweet);
     $('#tweets-container').append($tweet);
@@ -52,29 +52,39 @@ $(function() {
   const loadTweets = function() {
     $.ajax("http://localhost:8080/tweets", {method: "GET"})
       .then(function(tweets) {
-        console.log(tweets);
-        renderTweets(tweets);
+        const sortedTweets = tweets.sort((a,b) => {
+          return a.created_at < b.created_at ? 1 : -1;
+        });
+        renderTweets(sortedTweets);
       });
   };
   // loading the tweets
   loadTweets();
   $("#tweetForm").submit(function(event) {
     event.preventDefault();
+    const tweetBox = $('#tweet-text')[0].value;
+
+    if (!tweetBox) {
+      return alert("Not enough characters");
+    }
+    
+    if (tweetBox.length > 140) {
+      return alert("Too many characters");
+    }
+    
     const formData = $('#tweetForm').serialize();
-    console.log("formData" , formData);
+
     $.ajax({
       type: "POST",
       url: "/tweets/",
       data: formData,
       encode: true,
-    }).then(function(data) {
-      console.log("data", data);
+    }).then(function() {
+      loadTweets();
     }).catch(function(err) {
       console.log("err ",err);
     });
   });
-
-
 
 });
 
