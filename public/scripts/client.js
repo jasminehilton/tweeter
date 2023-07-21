@@ -24,7 +24,7 @@ const createTweetElement = function(tweetData) {
     <hr>
     <div class="tweet-footer-div">
       <div id="X DAYS AGO" >
-        ${tweetData.created_at}
+        ${timeago.format(tweetData.created_at)}
       </div>
       <div>
         <i class="fa-solid fa-flag tweet-emojis" ></i>
@@ -42,50 +42,24 @@ const renderTweets = function(tweets) {
   for (let tweet of tweets) {
     const $tweet = createTweetElement(tweet);
     $('#tweets-container').append($tweet);
-    
   }
  
 };
 
-
-
-// Test / driver code (temporary). Eventually will get this from the server.
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-];
-
-
 // wait for page to be ready
 $(function() {
+  
+  const loadTweets = function() {
+    $.ajax("http://localhost:8080/tweets", {method: "GET"})
+      .then(function(tweets) {
+        console.log(tweets);
+        renderTweets(tweets);
+      });
+  };
   // loading the tweets
-  renderTweets(data);
- 
+  loadTweets();
   $("#tweetForm").submit(function(event) {
     event.preventDefault();
-    // const tweetHold = $("#tweet-text")[0].value;
-    // console.log(tweetHold);
-
     const formData = $('#tweetForm').serialize();
     console.log("formData" , formData);
     $.ajax({
@@ -99,6 +73,9 @@ $(function() {
       console.log("err ",err);
     });
   });
+
+
+
 });
 
 
