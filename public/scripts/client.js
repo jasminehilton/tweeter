@@ -20,7 +20,7 @@ const createTweetElement = function(tweetData) {
     </div>
   </header>
   <div class="tweet-material">
-    <textarea name="text" id="tweet-text" placeholder=${escape1(tweetData.content.text)} readonly rows="3"></textarea>
+    ${escape1(tweetData.content.text)}
   </div>
   <footer>
     <hr>
