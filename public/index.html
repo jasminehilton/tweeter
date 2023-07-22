@@ -69,12 +69,11 @@
       </div>
   </header>
   <div>
+    <p class="error" id="errorEmpty">Error: Your tweet is empty</p>
+    <p class="error" id="errorTooLong">Error: Your tweet is too long</p>
     <main>
       <section class="new-tweet">
-        <!-- <h2>Compose Tweet</h2> -->
         <form id="tweetForm" method="POST" action="/tweets/">
-          <!-- <label for="tweet-text" class="tweet-placeholder">What are you humming about?</label> -->
-          <!-- <label for="tweet-text" class="tweet-placeholder" placeholder="What are you humming about?">dede</label> -->
           <textarea placeholder="What are you humming about?" name="text" id="tweet-text"></textarea>
           <div>
             <hr class="tweet-text-line">
@@ -86,9 +85,6 @@
         </form>
         <section id="tweets-container" >
         </section>
-
-        <p class="cloud"></p>
-
       </section>
     </main>
   </div>

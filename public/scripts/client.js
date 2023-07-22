@@ -5,7 +5,8 @@
  */
 
 const createTweetElement = function(tweetData) {
-  const $tweet = $(`<article class="tweet" >
+  const $tweet = $(
+    `<article class="tweet" >
   <header class="tweet-header" >
     <div class="tweet-header-div">
       <div class="tweet-header-left">
@@ -33,7 +34,8 @@ const createTweetElement = function(tweetData) {
       </div>
     </div>
   </footer>
-</article>`);
+</article>`
+  );
   return $tweet;
 };
 
@@ -52,10 +54,13 @@ $(function() {
   const loadTweets = function() {
     $.ajax("http://localhost:8080/tweets", {method: "GET"})
       .then(function(tweets) {
+        // NEEDS VALIDATION
+        $(".error").hide();
         const sortedTweets = tweets.sort((a,b) => {
           return a.created_at < b.created_at ? 1 : -1;
         });
         renderTweets(sortedTweets);
+        
       });
   };
   // loading the tweets
@@ -64,12 +69,13 @@ $(function() {
     event.preventDefault();
     const tweetBox = $('#tweet-text')[0].value;
 
+
     if (!tweetBox) {
-      return alert("Not enough characters");
+      return $("#errorEmpty").show();
     }
-    
+
     if (tweetBox.length > 140) {
-      return alert("Too many characters");
+      return $("#errorTooLong").show();
     }
     
     const formData = $('#tweetForm').serialize();
@@ -85,6 +91,12 @@ $(function() {
       console.log("err ",err);
     });
   });
+
+  const escape = function(str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
 
 });
 
