@@ -1,16 +1,16 @@
 nav {
-  height: 120px;
   width: 100%;
-  background-color: #4056A1;
+  background-color: transparent;
   color: #FFFFFF;
   padding: 1.5em 1.5em 0 1.5em;
   display:flex;
   justify-content: space-between;
   position:fixed;
+  z-index: 1;
 }
 
 nav span {
-  font-family: 'Bungee', cursive, sans-serif;
+  font-family: 'Bungee', sans-serif;
   font-size: 2em;
 }
 
@@ -18,8 +18,10 @@ nav span {
   font-size: 24px;
   font-family: 'Source Sans 3', sans-serif;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
+}
+
+#tweetArrow {
+  text-decoration: none;
 }
 
 #nav-tweet-write {

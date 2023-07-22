@@ -4,28 +4,29 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+// a string literal of tweets in html
 const createTweetElement = function(tweetData) {
   const $tweet = $(
     `<article class="tweet" >
   <header class="tweet-header" >
     <div class="tweet-header-div">
       <div class="tweet-header-left">
-        <img src= ${tweetData.user.avatars}>
-        ${tweetData.user.name}
+        <img src= ${escape1(tweetData.user.avatars)}>
+        ${escape1(tweetData.user.name)}
       </div>
       <div class="tweet-header-right">
-        ${tweetData.user.handle}
+        ${escape1(tweetData.user.handle)}
       </div>
     </div>
   </header>
   <div class="tweet-material">
-    ${tweetData.content.text}
+    <textarea name="text" id="tweet-text" placeholder=${escape1(tweetData.content.text)} readonly rows="3"></textarea>
   </div>
   <footer>
     <hr>
     <div class="tweet-footer-div">
-      <div id="X DAYS AGO" >
-        ${timeago.format(tweetData.created_at)}
+      <div>
+        ${escape1(timeago.format(tweetData.created_at))}
       </div>
       <div>
         <i class="fa-solid fa-flag tweet-emojis" ></i>
@@ -39,6 +40,7 @@ const createTweetElement = function(tweetData) {
   return $tweet;
 };
 
+// renders new tweets
 const renderTweets = function(tweets) {
   $('#tweets-container').empty();
   for (let tweet of tweets) {
@@ -48,38 +50,42 @@ const renderTweets = function(tweets) {
  
 };
 
-// wait for page to be ready
+// escape1 function protects against cross side scripting
+const escape1 = function(str) {
+  let div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
+// waits for dom to load before adding tweets to the page
 $(function() {
-  
   const loadTweets = function() {
     $.ajax("http://localhost:8080/tweets", {method: "GET"})
       .then(function(tweets) {
-        // NEEDS VALIDATION
         $(".error").hide();
         const sortedTweets = tweets.sort((a,b) => {
           return a.created_at < b.created_at ? 1 : -1;
         });
         renderTweets(sortedTweets);
-        
       });
   };
-  // loading the tweets
+
+  // loads the tweets
   loadTweets();
   $("#tweetForm").submit(function(event) {
     event.preventDefault();
     const tweetBox = $('#tweet-text')[0].value;
-
-
+    // checks if tweet form is empty
     if (!tweetBox) {
       return $("#errorEmpty").show();
     }
-
+    // checks if tweet is over max length
     if (tweetBox.length > 140) {
       return $("#errorTooLong").show();
     }
-    
+    // serializes tweets
     const formData = $('#tweetForm').serialize();
-
+    // ajax post request
     $.ajax({
       type: "POST",
       url: "/tweets/",
@@ -91,13 +97,6 @@ $(function() {
       console.log("err ",err);
     });
   });
-
-  const escape = function(str) {
-    let div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  };
-
 });
 
 

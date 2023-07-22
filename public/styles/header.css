@@ -1,12 +1,13 @@
-header {
-  height: 550px; /* 400px; */ 
-  padding-top: 150px;
+.mainHeader {
+  height: 450px; 
+  padding-top: 7rem;
   width: 100%;
   display:flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #f4f1ec;
+  background-color: #cb9922;
+  position:fixed;
   background-image:url(../images/asfalt-light.png);
 }
 

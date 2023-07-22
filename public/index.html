@@ -19,7 +19,7 @@
       rel="stylesheet"
     />
 
-    <!-- font awesome  -->
+    <!-- Font Awesome  -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -54,21 +54,21 @@
       <span class="nav-tweet">
         <span id="nav-tweet-write">Write</span> a new tweet
         <br>
-        <i class="fa-solid fa-angles-down" style="color: #f03c1f"></i></span> 
-        <!-- need to figure how to put the arrow centered under the text -->
+        <i><a href="#tweetForm" class="fa-solid fa-angles-down" id="tweetArrow" style="color: #f03c1f "></a></i>
+      </span> 
     </nav>
 
     <!-- Page-specific (main) content here -->
-    <header>
-      <div class="header-1">
+    <header class="mainHeader" >
+      <div class="header-1" id="profileImg" >
           <img src="/images/profile-hex.png"> 
       </div>
       <br>
       <div>
-          <h2>Jasmine Hilton</h2>
+          <h2>Amy Mansell</h2>
       </div>
   </header>
-  <div>
+  <div class="mainTweets" >
     <p class="error" id="errorEmpty">Error: Your tweet is empty</p>
     <p class="error" id="errorTooLong">Error: Your tweet is too long</p>
     <main>
