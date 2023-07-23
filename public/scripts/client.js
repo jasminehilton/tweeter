@@ -47,7 +47,6 @@ const renderTweets = function(tweets) {
     const $tweet = createTweetElement(tweet);
     $('#tweets-container').append($tweet);
   }
- 
 };
 
 // escape1 function protects against cross side scripting
@@ -57,12 +56,21 @@ const escape1 = function(str) {
   return div.innerHTML;
 };
 
+const createErrorElement = function(errMsg) {
+  $('.error-message').html(
+    `<p class="error">${escape1(errMsg)}</p>`
+  ).show();
+};
+
 // waits for dom to load before adding tweets to the page
 $(function() {
+  // onload - hide the error message
+  $(".error-message").hide();
+
   const loadTweets = function() {
     $.ajax("http://localhost:8080/tweets", {method: "GET"})
       .then(function(tweets) {
-        $(".error").hide();
+        // sort the tweets by latest
         const sortedTweets = tweets.sort((a,b) => {
           return a.created_at < b.created_at ? 1 : -1;
         });
@@ -74,14 +82,16 @@ $(function() {
   loadTweets();
   $("#tweetForm").submit(function(event) {
     event.preventDefault();
+    $(".error-message").hide();
+
     const tweetBox = $('#tweet-text')[0].value;
     // checks if tweet form is empty
     if (!tweetBox) {
-      return $("#errorEmpty").show();
+      return createErrorElement('Error: Your tweet is empty');
     }
     // checks if tweet is over max length
     if (tweetBox.length > 140) {
-      return $("#errorTooLong").show();
+      return createErrorElement('Error: Your tweet is too long');
     }
     // serializes tweets
     const formData = $('#tweetForm').serialize();
@@ -93,6 +103,8 @@ $(function() {
       encode: true,
     }).then(function() {
       loadTweets();
+      $('textarea').val('');
+      $('#counter').val(140);
     }).catch(function(err) {
       console.log("err ",err);
     });
