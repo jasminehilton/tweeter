@@ -75,7 +75,7 @@ $(function() {
           return a.created_at < b.created_at ? 1 : -1;
         });
         renderTweets(sortedTweets);
-      });
+      }).catch(err => console.error('error', err.stack));
   };
 
   // loads the tweets
