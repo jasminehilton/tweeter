@@ -42,10 +42,10 @@ const createTweetElement = function(tweetData) {
 
 // renders new tweets
 const renderTweets = function(tweets) {
-  $('#tweets-container').empty();
+  $("#tweets-container").empty();
   for (let tweet of tweets) {
     const $tweet = createTweetElement(tweet);
-    $('#tweets-container').append($tweet);
+    $("#tweets-container").append($tweet);
   }
 };
 
@@ -57,9 +57,9 @@ const escape1 = function(str) {
 };
 
 const createErrorElement = function(errMsg) {
-  $('.error-message').html(
-    `<p class="error">${escape1(errMsg)}</p>`
-  ).show();
+  $(".error-message")
+    .html(`<p class="error">${escape1(errMsg)}</p>`)
+    .show();
 };
 
 // waits for dom to load before adding tweets to the page
@@ -68,14 +68,17 @@ $(function() {
   $(".error-message").hide();
 
   const loadTweets = function() {
-    $.ajax("http://localhost:8080/tweets", {method: "GET"})
+    $.get("/tweeets")
       .then(function(tweets) {
         // sort the tweets by latest
-        const sortedTweets = tweets.sort((a,b) => {
+        const sortedTweets = tweets.sort((a, b) => {
           return a.created_at < b.created_at ? 1 : -1;
         });
         renderTweets(sortedTweets);
-      }).catch(err => console.error('error', err.stack));
+      })
+      .catch((err) => {
+        createErrorElement("error: " + 'unable to fetch tweet');
+      });
   };
 
   // loads the tweets
@@ -84,33 +87,27 @@ $(function() {
     event.preventDefault();
     $(".error-message").hide();
 
-    const tweetBox = $('#tweet-text')[0].value.trim();
+    const tweetBox = $("#tweet-text")[0].value.trim();
     // checks if tweet form is empty
     if (!tweetBox) {
-      $('#counter').val(140);
-      return createErrorElement('Error: Your tweet is empty');
+      $("#counter").val(140);
+      return createErrorElement("Error: Your tweet is empty");
     }
     // checks if tweet is over max length
     if (tweetBox.length > 140) {
-      return createErrorElement('Error: Your tweet is too long');
+      return createErrorElement("Error: Your tweet is too long");
     }
     // serializes tweets
-    const formData = $('#tweetForm').serialize();
+    const formData = $("#tweetForm").serialize();
     // ajax post request
-    $.ajax({
-      type: "POST",
-      url: "/tweets/",
-      data: formData,
-      encode: true,
-    }).then(function() {
-      loadTweets();
-      $('textarea').val('');
-      $('#counter').val(140);
-    }).catch(function(err) {
-      console.log("err ",err);
-    });
+    $.post('/tweets', formData)
+      .then(function() {
+        loadTweets();
+        $("textarea").val("");
+        $("#counter").val(140);
+      })
+      .catch(function(err) {
+        console.log("err ", err);
+      });
   });
 });
-
-
-
