@@ -84,9 +84,10 @@ $(function() {
     event.preventDefault();
     $(".error-message").hide();
 
-    const tweetBox = $('#tweet-text')[0].value;
+    const tweetBox = $('#tweet-text')[0].value.trim();
     // checks if tweet form is empty
     if (!tweetBox) {
+      $('#counter').val(140);
       return createErrorElement('Error: Your tweet is empty');
     }
     // checks if tweet is over max length
