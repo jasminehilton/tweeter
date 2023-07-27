@@ -68,7 +68,7 @@ $(function() {
   $(".error-message").hide();
 
   const loadTweets = function() {
-    $.get("/tweeets")
+    $.get("/tweets")
       .then(function(tweets) {
         // sort the tweets by latest
         const sortedTweets = tweets.sort((a, b) => {
